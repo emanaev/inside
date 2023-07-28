@@ -1,5 +1,5 @@
 run:
-	docker run -p 8880:80 -d --restart=always --name mon -v /var/run:/tmp/var/run mon
+	./run.sh
 	docker logs mon
 ssh:
 	ssh -p 9992 root@localhost
@@ -10,7 +10,9 @@ stop:
 	docker rm mon
 build:
 	docker build -t mon .
+	docker save mon -o mon.tar
+	rm tmp
+	ln -s /var/run tmp
 
 release:
-	docker save mon -o mon.tar
-
+	tar -cvzf monitoring.tar.gz mon.tar tmp run.sh

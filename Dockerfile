@@ -7,7 +7,7 @@ RUN adduser -S -s /bin/bash nginx -G wheel \
   && echo "nginx:P@ssw0rd" | chpasswd \
   && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
   && chmod 0440 /etc/sudoers.d/$USER \
-  && ln -s /tmp/var/run/docker.sock /var/run/docker.sock
+  && ln -s /tmp/data/docker.sock /var/run/docker.sock
 
 FROM scratch
 COPY --from=builder / /
